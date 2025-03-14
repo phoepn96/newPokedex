@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="../styles/pokecard.css">
+    <link rel="stylesheet" href="../styles/general.css">
+    <link rel="stylesheet" href="../styles/bigCard.css">
+</head>
+<body>
+    <header></header>
+    <main>
+        <div id="content">
+
+        </div>
+        <div id="loadDiv" class="spinner">
+          <img src="../assets/icons/pokeball.png" alt="pokeball" id="pokeball" onclick="loadMorePokemon()">
+        </div>
+        <dialog id="spinner" class="hide">
+            <img src="../assets/icons/pokeball.png" alt="pokeball" id="pokeballSpinner">
+        </dialog>
+        <dialog id="bigCard"></dialog>
+    </main>
+    <footer></footer>
+    <script src="../scripts/assets.js" defer></script>
+    <script src="../scripts/getFunctions.js" defer></script>
+    <script src="../scripts/renderFunctions.js" defer></script>
+    <script src="../scripts/templates.js" defer></script>
+    <script src="../scripts/dialogFunctions.js" defer></script>
+    
+</body>
+</html>
