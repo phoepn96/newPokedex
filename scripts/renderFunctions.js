@@ -7,7 +7,8 @@ async function renderPokeCard(amount){
     const specificPokemonData = await getSpecificPokemonData(pokemonData);
     const abilityDataAObj = await getAbilityData(specificPokemonData);
     const contentRef = document.getElementById("content");
-    createPokeCard(contentRef, pokemonData, specificPokemonData, abilityDataAObj);
+    createPokeCard(contentRef, specificPokemonData, abilityDataAObj);
+    addInputEventListener(specificPokemonData);
    }
    catch(error){
        console.error(error);
@@ -18,8 +19,9 @@ async function renderPokeCard(amount){
     
 }
 
-function createPokeCard(contentRef, pokemonData, specificPokemonData, abilityDataObj){                              // For-loop for every Pokemon (based on amount) and contains all the additonal add functions //
-    for(let cardIndex = 0; cardIndex < pokemonData.results.length; cardIndex++){
+function createPokeCard(contentRef, specificPokemonData, abilityDataObj){
+   contentRef.innerHTML = "";                                                                 // For-loop for every Pokemon (based on amount) and contains all the additonal add functions //
+    for(let cardIndex = 0; cardIndex < Object.keys(specificPokemonData).length; cardIndex++){
         contentRef.innerHTML += cardTemp(specificPokemonData, cardIndex);
         addAbilitys(cardIndex, abilityDataObj);
         addTypes(cardIndex, specificPokemonData);
@@ -34,6 +36,22 @@ async function loadMorePokemon(){
       await renderPokeCard(amount);
 }
 
+async function renderSearchedPokemon(searchedPokemon){
+   const abilityData = await getAbilityData(searchedPokemon);
+   const contentRef = document.getElementById("content");
+   createSearchedPokeCard(contentRef, searchedPokemon, abilityData);
+}
+
+function createSearchedPokeCard(contentRef, searchedPokemon, abilityDataObj){
+    contentRef.innerHTML = "";                                                       
+    for(let cardIndex = 0; cardIndex < searchedPokemon.length; cardIndex++){
+      console.log(cardIndex);
+        contentRef.innerHTML += cardTemp(searchedPokemon, cardIndex);
+        addAbilitys(cardIndex, abilityDataObj);
+        addTypes(cardIndex, searchedPokemon);
+        addBackgroundColor(cardIndex, searchedPokemon);
+    }
+}
 // ---------- END RENDER FUNCTIONS -------- //
 
 

@@ -29,7 +29,7 @@ function nextBigCard(cardIndex){
 }
 
 function previousBigCard(cardIndex){
-    cardIndex--
+    filterPokemon(cardIndex);
     if(cardIndex < 0){
         cardIndex = amount-1;
         openBigCard(cardIndex);
@@ -41,4 +41,32 @@ function previousBigCard(cardIndex){
 function closeBigCard(){
     const bigCardRef = document.getElementById("bigCard");
     bigCardRef.close();
+}
+
+function filterPokemon(specificPokemonData){
+    const searchInput = document.getElementById("searchInput").value;
+    let searchedPokemon = [];
+    if(searchInput.length > 2){
+        specificPokemonData.filter((pokemon) =>{
+            let targetPokemon = pokemon.name.includes(searchInput.toLowerCase());
+            if(targetPokemon === true){
+                searchedPokemon.push(pokemon);
+            }
+        });
+        renderSearchedPokemon(searchedPokemon);
+    }else{
+        renderPokeCard(amount);
+    }
+}
+
+function addInputEventListener(specificPokemonData){
+    const searchInput = document.getElementById("searchInput");
+
+    searchInput.removeEventListener("input", ()=>{
+        filterPokemon(specificPokemonData);
+    });
+
+    searchInput.addEventListener("input", ()=>{
+        filterPokemon(specificPokemonData);
+    });
 }
